@@ -29,7 +29,7 @@ def main():
 
     # push
     push = subparsers.add_parser("push", help="Push a generated report to delivery channels")
-    push.add_argument("--channel", choices=["telegram", "feishu", "stdout"], default="stdout", help="Delivery channel")
+    push.add_argument("--channel", choices=["telegram", "feishu", "email", "stdout"], default="stdout", help="Delivery channel")
     push.add_argument("--report", help="Path to report file (default: latest)")
 
     args = parser.parse_args()

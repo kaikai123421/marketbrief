@@ -243,6 +243,12 @@ def run_push(channel: str, report_path: str | None = None):
         push_report(cfg, report_path)
     elif channel == "stdout":
         log.info("stdout channel — nothing to push")
+    elif channel == "email":
+        if not cfg.has_email:
+            log.error("QQ email not configured — set QQ_EMAIL, QQ_AUTH_CODE, REPORT_RECIPIENT")
+            sys.exit(1)
+        from marketbrief.delivery.email import push_report
+        push_report(cfg, report_path)
     else:
         log.error(f"Unknown channel: {channel}")
         sys.exit(1)

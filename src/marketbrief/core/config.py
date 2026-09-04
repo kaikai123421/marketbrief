@@ -41,6 +41,11 @@ class MarketBriefConfig:
         self.fred_api_key = os.environ.get("FRED_API_KEY", "")
         self.sosovalue_api_key = os.environ.get("SOSOVALUE_API_KEY", "")
 
+        # QQ email delivery
+        self.qq_email = os.environ.get("QQ_EMAIL", "")
+        self.qq_auth_code = os.environ.get("QQ_AUTH_CODE", "")
+        self.report_recipient = os.environ.get("REPORT_RECIPIENT", "")
+
         # Telegram
         self.telegram_bot_token = os.environ.get("TELEGRAM_BOT_TOKEN", "")
         self.telegram_chat_id = os.environ.get("TELEGRAM_CHAT_ID", "")
@@ -73,6 +78,10 @@ class MarketBriefConfig:
     @property
     def has_feishu(self) -> bool:
         return bool(self.feishu_app_id and self.feishu_app_secret and self.feishu_chat_id)
+
+    @property
+    def has_email(self) -> bool:
+        return bool(self.qq_email and self.qq_auth_code and self.report_recipient)
 
     def get_prompt(self, name: str) -> str:
         """Load a prompt file by name (e.g. 'morning_report' → prompts/morning_report.txt)."""

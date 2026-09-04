@@ -1,6 +1,6 @@
 ---
 name: marketbrief
-description: Generate AI-powered market intelligence reports with multi-source data (Yahoo Finance, FRED, CoinGecko, 40+ RSS feeds), Claude AI analysis, and multi-channel delivery (Telegram, Feishu, terminal). Trigger when user asks for morning report, market briefing, daily market summary, market snapshot, or wants to analyze market data across equities, crypto, commodities, FX, rates, and economic indicators. Also trigger for economic calendar, news aggregation, or ETF flow data.
+description: 生成美股监控晨报，汇总公开行情、VIX/VXN、宏观事件和新闻，并支持中文报告与 QQ 邮箱发送。
 ---
 
 # MarketBrief — AI-Powered Market Intelligence
@@ -41,6 +41,11 @@ pip install marketbrief[mcp]
    - `FRED_API_KEY` — Enhances economic data coverage
    - `SOSOVALUE_API_KEY` — ETF flow data
    - `TELEGRAM_BOT_TOKEN` + `TELEGRAM_CHAT_ID` — Telegram delivery
+   - `QQ_EMAIL` + `QQ_AUTH_CODE` + `REPORT_RECIPIENT` — QQ SMTP delivery (port 587 with STARTTLS)
+
+### 中文美股监控晨报
+
+GitHub Actions 可在工作日定时生成中文晨报，并通过 QQ SMTP 发送。请在仓库的 Actions Secrets 中配置 `QQ_EMAIL`、`QQ_AUTH_CODE` 和 `REPORT_RECIPIENT`；授权码不得写入配置文件、提交记录或日志。
 
 3. Edit `config/portfolio.json` with your holdings and interests.
 

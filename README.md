@@ -1,5 +1,9 @@
 # MarketBrief
 
+## 中文说明：美股监控 Skill
+
+本项目用于生成中文美股监控晨报，重点包含市场总览、VIX/VXN 波动风险、宏观事件、重要新闻和观察清单。首版使用公开数据源，不依赖长桥 API；邮件发送使用 QQ SMTP，授权码必须放在 GitHub Actions Secrets 中，不能写入代码或日志。
+
 [![MarketBrief MCP server](https://glama.ai/mcp/servers/yukipanpan/marketbrief/badges/score.svg)](https://glama.ai/mcp/servers/yukipanpan/marketbrief)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)

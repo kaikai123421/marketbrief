@@ -23,7 +23,8 @@
     {"label": "US 10Y", "stooq": "10usy.b", "yf": "^TNX"}
   ],
   "volatility": [
-    {"label": "VIX", "stooq": "^vix", "yf": "^VIX"}
+    {"label": "VIX", "stooq": "^vix", "yf": "^VIX"},
+    {"label": "VXN", "stooq": "^vxn", "yf": "^VXN"}
   ],
   "fx": [
     {"label": "DXY",     "stooq": "dxy.f",  "yf": "DX-Y.NYB"},
