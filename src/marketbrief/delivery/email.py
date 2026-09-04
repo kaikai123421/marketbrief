@@ -20,7 +20,6 @@ log = logging.getLogger("marketbrief")
 def _report_parts(report_path: str) -> tuple[str, str, str]:
     payload = json.loads(pathlib.Path(report_path).read_text(encoding="utf-8"))
     report = payload.get("report") or {}
-    snapshot = payload.get("snapshot") or {}
     tagline = report.get("tagline") or "美股市场晨报"
     text = json.dumps(payload, ensure_ascii=False, indent=2, default=str)
     escaped = html.escape(text).replace("\n", "<br>\n")
