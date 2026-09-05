@@ -73,6 +73,7 @@ def _run_data_only(cfg: MarketBriefConfig, output_format: str) -> dict:
 def _run_full(cfg: MarketBriefConfig, output_format: str) -> dict:
     """Full pipeline with Claude AI analysis."""
     import concurrent.futures
+    import datetime
 
     from marketbrief.core.analysis import run_preflight, run_report
     from marketbrief.fetchers.market import fetch_market_snapshot
@@ -91,6 +92,14 @@ def _run_full(cfg: MarketBriefConfig, output_format: str) -> dict:
 
     # Build snapshot text for Claude
     snapshot_text = snapshot.get("text", "") if isinstance(snapshot, dict) else str(snapshot)
+    if datetime.date.today().weekday() == 5:
+        snapshot_text = (
+            "=== SATURDAY WEEKLY WRAP ===\n"
+            "This is the Saturday report: recap Friday's US market close first, "
+            "then summarize the completed Monday-Friday week, and finish with "
+            "the key risks and catalysts for next week. Do not treat Saturday as a trading day.\n\n"
+            + snapshot_text
+        )
     if calendar_events:
         cal_text = "\n".join(
             f"  {e.get('time', '')} | {e.get('name', '')} | {e.get('impact', '')}"
