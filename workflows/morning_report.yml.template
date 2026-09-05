@@ -24,7 +24,7 @@ on:
     #   07:00 SGT = 23:00 UTC (prev day)
     #   19:00 SGT = 11:00 UTC
     #
-    - cron: '0 0 * * 1-5'     # Morning brief, 08:00 China Standard Time
+    - cron: '0 0 * * 1-6'     # Morning brief, 08:00 China Standard Time; Saturday covers Friday US close
   workflow_dispatch:  # manual trigger
 
 jobs:
