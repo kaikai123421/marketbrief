@@ -3,7 +3,6 @@
 # Copy this file to .github/workflows/morning_report.yml
 # Then configure repository secrets (Settings → Secrets → Actions):
 #   - ANTHROPIC_API_KEY (required for AI analysis)
-#   - QQ_EMAIL + QQ_AUTH_CODE + REPORT_RECIPIENT (for QQ email delivery)
 #   - FRED_API_KEY (optional, enhances economic data)
 #   - SOSOVALUE_API_KEY (optional, ETF flow data)
 #
@@ -12,20 +11,7 @@
 name: Morning Report
 
 on:
-  schedule:
-    # ── Customize these times for your timezone ──
-    # Default: SGT (UTC+8) — adjust offsets for your region
-    #
-    # Example: US Eastern (UTC-5 / UTC-4 DST)
-    #   07:00 ET = 11:00/12:00 UTC
-    #   19:00 ET = 23:00/00:00 UTC
-    #
-    # Example: SGT (UTC+8)
-    #   07:00 SGT = 23:00 UTC (prev day)
-    #   19:00 SGT = 11:00 UTC
-    #
-    - cron: '0 0 * * 1-6'     # Morning brief, 08:00 China Standard Time; Saturday covers Friday US close
-  workflow_dispatch:  # manual trigger
+  workflow_dispatch:  # manual data generation only; delivery is handled in ChatGPT
 
 jobs:
   generate-and-push:
@@ -70,14 +56,6 @@ jobs:
           SOSOVALUE_API_KEY: ${{ secrets.SOSOVALUE_API_KEY }}
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: marketbrief generate --output json > reports/latest.json
-
-      - name: Send report by QQ email
-        if: success()
-        env:
-          QQ_EMAIL: ${{ secrets.QQ_EMAIL }}
-          QQ_AUTH_CODE: ${{ secrets.QQ_AUTH_CODE }}
-          REPORT_RECIPIENT: ${{ secrets.REPORT_RECIPIENT }}
-        run: marketbrief push --channel email --report reports/latest.json
 
       - name: Save cache
         uses: actions/cache/save@v4
